@@ -20,16 +20,12 @@ class JoinEventListener implements Listener{
         $plugin->getServer()->getPluginManager()->registerEvents($this, $plugin);
     }
 
-    public function getPlayer(Player $player) : string{
-        return $this->plugin->getDataFolder() . "players" . DIRECTORY_SEPARATOR . strtolower($player->getName()) . ".yml";
-    }
-
     public function getCfg(Player $player) : Config{
-        return new Config($this->getPlayer($player), Config::YAML);
+        return new Config($this->plugin->getPlayer($player), Config::YAML);
     }
 
     public function regPlayer(Player $player) : void{
-        new Config($this->getPlayer($player), Config::YAML, [
+        new Config($this->plugin->getPlayer($player), Config::YAML, [
             "Common" => 0,
             "Vote" => 0,
             "Rare" => 0,
