@@ -20,10 +20,6 @@ class JoinEventListener implements Listener{
         $plugin->getServer()->getPluginManager()->registerEvents($this, $plugin);
     }
 
-    public function getCfg(Player $player) : Config{
-        return new Config($this->plugin->getPlayer($player), Config::YAML);
-    }
-
     public function regPlayer(Player $player) : void{
         new Config($this->plugin->getPlayer($player), Config::YAML, [
             "Common" => 0,

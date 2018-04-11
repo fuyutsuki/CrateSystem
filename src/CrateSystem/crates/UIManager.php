@@ -7,7 +7,7 @@ namespace CrateSystem\crates;
 use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\utils\{
-    Config, TextFormat as C, TextFormat
+    Config, TextFormat as C
 };
 use CrateSystem\Main;
 
@@ -24,14 +24,14 @@ class UIManager{
         $form = $this->plugin->FormAPI->createSimpleForm(function (Player $player, array $data){
             switch($data[0]){
                 case 0:
-                    $player->sendMessage(TextFormat::RED . "Exiting Crates");
+                    $player->sendMessage(C::RED . "Exiting Crates");
                     return;
                 case 1:
                     if($this->plugin->getCfg($player)->get("Common") >= 1){
                         $item = mt_rand($this->plugin->getItemCfg()->get("Common"));
                         $player->getInventory()->addItem(Item::get($item));
                     }else{
-                        $player->sendMessage(TextFormat::RED . "You do not have any common keys!");
+                        $player->sendMessage(C::RED . "You do not have any common keys!");
                     }
                     return;
                 case 2:
@@ -39,7 +39,7 @@ class UIManager{
                         $item = mt_rand($this->plugin->getItemCfg()->get("Vote"));
                         $player->getInventory()->addItem(Item::get($item));
                     }else{
-                        $player->sendMessage(TextFormat::RED . "You do not have any vote keys!");
+                        $player->sendMessage(C::RED . "You do not have any vote keys!");
                     }
                     return;
                 case 3:
@@ -47,7 +47,7 @@ class UIManager{
                         $item = mt_rand($this->plugin->getItemCfg()->get("Rare"));
                         $player->getInventory()->addItem(Item::get($item));
                     }else{
-                        $player->sendMessage(TextFormat::RED . "You do not have any rare keys!");
+                        $player->sendMessage(C::RED . "You do not have any rare keys!");
                     }
                     return;
                 case 4:
@@ -55,7 +55,7 @@ class UIManager{
                         $item = mt_rand($this->plugin->getItemCfg()->get("Legendary"));
                         $player->getInventory()->addItem(Item::get($item));
                     }else{
-                        $player->sendMessage(TextFormat::RED . "You do not have any legendary keys!");
+                        $player->sendMessage(C::RED . "You do not have any legendary keys!");
                     }
                     return;
             }
