@@ -1,0 +1,6 @@
+name: CrateSystem
+description: CrateSystem Plugin adds crate to your server.
+version: 1.0.0
+api: [3.0.0-ALPHA11]
+main: CrateSystem\Main
+author: CLADevs Team
