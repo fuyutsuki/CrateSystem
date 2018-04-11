@@ -18,6 +18,10 @@ class CrateCommand extends BaseCommand{
 
     /** @var Main */
     private $plugin;
+    /** @var Config */
+    private $cfg;
+    /** @var UIManager */
+    private $UIManager;
 
     public function __construct(Main $plugin){
         parent::__construct("crate", $plugin);
@@ -37,7 +41,6 @@ class CrateCommand extends BaseCommand{
         if($this->cfg->get("type") == "ui"){
             $this->UIManager->CrateUI($sender);
         }
-
         return true;
     }
 }

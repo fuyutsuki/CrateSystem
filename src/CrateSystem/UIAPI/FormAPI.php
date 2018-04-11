@@ -27,6 +27,7 @@ class FormAPI extends PluginBase implements Listener{
         }
         return $form;
     }
+
     public function createSimpleForm(callable $function = null) : SimpleForm{
         $this->formCount++;
         $form = new SimpleForm($this->formCount, $function);
@@ -35,6 +36,7 @@ class FormAPI extends PluginBase implements Listener{
         }
         return $form;
     }
+
     public function onPacketReceived(DataPacketReceiveEvent $ev) : void{
         $pk = $ev->getPacket();
         if($pk instanceof ModalFormResponsePacket){
@@ -58,12 +60,13 @@ class FormAPI extends PluginBase implements Listener{
             }
         }
     }
-    public function onPlayerQuit(PlayerQuitEvent $ev){
+
+    public function onPlayerQuit(PlayerQuitEvent $ev)  : void{
         $player = $ev->getPlayer();
         foreach($this->forms as $id => $form){
             if($form->isRecipient($player)){
                 unset($this->forms[$id]);
-                break;
+                return;
             }
         }
     }

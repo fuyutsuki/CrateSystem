@@ -14,17 +14,22 @@ use CrateSystem\events\EventManager;
 
 class Main extends PluginBase{
 
-	public function onEnable(){
-		$this->registerManager();
-		$this->getLogger()->info("CrateSystem has been loaded!");
-	}
+    /** @var FormAPI */
+    public $FormAPI;
+    /** @var CrateManager */
+    public $CrateManager;
 
-	public function registerManager(): void{
-		new Configuration($this);
-		new CommandManager($this);
-		new EventManager($this);
-		$this->CrateManager = new CrateManager($this);
-		#$this->KeyManager = new KeyManager($this);
-		$this->FormAPI = new FormAPI();
-	}
+    public function onEnable() : void{
+        $this->registerManager();
+        $this->getLogger()->info("CrateSystem has been loaded!");
+    }
+
+    public function registerManager() : void{
+        new Configuration($this);
+        new CommandManager($this);
+        new EventManager($this);
+        $this->CrateManager = new CrateManager($this);
+        //$this->KeyManager = new KeyManager($this);
+        $this->FormAPI = new FormAPI();
+    }
 }

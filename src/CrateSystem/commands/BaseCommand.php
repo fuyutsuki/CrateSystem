@@ -6,7 +6,7 @@ namespace CrateSystem\commands;
 
 use pocketmine\Server;
 use pocketmine\command\{
-    Command, CommandSender, PluginIdentifiableCommand
+    Command, PluginIdentifiableCommand
 };
 use pocketmine\plugin\Plugin;
 
@@ -30,5 +30,4 @@ abstract class BaseCommand extends Command implements PluginIdentifiableCommand{
     public function getServer() : Server{
         return $this->plugin->getServer();
     }
-
 }

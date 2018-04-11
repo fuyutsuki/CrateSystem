@@ -3,24 +3,24 @@ declare(strict_types=1);
 
 namespace CrateSystem\commands;
 
+use pocketmine\command\ConsoleCommandSender;
 use pocketmine\Player;
 use pocketmine\command\CommandSender;
-use pocketmine\level\sound\EndermanTeleportSound;
-use pocketmine\math\Vector3;
 use pocketmine\lang\TranslationContainer;
 use pocketmine\utils\{
     Config, TextFormat as C
 };
 
-use CrateSystem\crates\UIManager;
 use CrateSystem\Main;
 
 class KeyCommand extends BaseCommand{
 
     /** @var Main */
     private $plugin;
-
+    /** @var array */
     public $keys = ["Common"];
+    /** @var Config */
+    private $cfg;
 
     public function __construct(Main $plugin){
         parent::__construct("key", $plugin);
@@ -37,12 +37,12 @@ class KeyCommand extends BaseCommand{
 
         if(count($args) < 1){
             $sender->sendMessage($usage);
-            return true;
+            return false;
         }
 
         if(!isset($args[1])){
             $sender->sendMessage($usage);
-            return true;
+            return false;
         }
 
         $player = $this->getServer()->getPlayerExact($args[0]);
@@ -63,6 +63,7 @@ class KeyCommand extends BaseCommand{
             $player->sendMessage(C::YELLOW . "You now have $args[2] $args[1] Crate.");
         }else{
             $sender->sendMessage(C::RED . "Could'nt found Crate $args[1]");
+            return false;
         }
 
         return true;

@@ -10,11 +10,13 @@ use CrateSystem\Main;
 
 class CrateManager{
 
-	/** @var Main */
-	private $plugin;
+    /** @var Main */
+    private $plugin;
+    /** @var Config */
+    private $cfg;
 
-	public function __construct(Main $plugin){
-		$this->plugin = $plugin;
-		$this->cfg = new Config($this->plugin->getDataFolder() . "items.yml", Config::YAML);
-	}
+    public function __construct(Main $plugin){
+        $this->plugin = $plugin;
+        $this->cfg = new Config($this->plugin->getDataFolder() . "items.yml", Config::YAML);
+    }
 }

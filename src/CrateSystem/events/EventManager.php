@@ -8,16 +8,15 @@ use CrateSystem\Main;
 
 class EventManager{
 
-	/** @var Main */
-	private $plugin;
+    /** @var Main */
+    private $plugin;
 
-	public function __construct(Main $plugin){
-		$this->plugin = $plugin;
-		$this->registerEvents();
-	}
+    public function __construct(Main $plugin){
+        $this->plugin = $plugin;
+        $this->registerEvents();
+    }
 
-	public function registerEvents(): void{
-		$p = $this->plugin;
-		new JoinEvent($p);
-	}
+    public function registerEvents() : void{
+        new JoinEventListener($this->plugin);
+    }
 }

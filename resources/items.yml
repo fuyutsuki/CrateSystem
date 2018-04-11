@@ -3,17 +3,14 @@ common:
   items:
     - "1:0:10"
     - "2:0:12"
-
 vote:
   items:
     - "1:0:10"
     - "2:0:12"
-
 rare:
   items:
     - "1:0:10"
     - "2:0:12"
-
 legendary:
   items:
     - "1:0:10"
