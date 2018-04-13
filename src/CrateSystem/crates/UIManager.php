@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CrateSystem\crates;
 
 use pocketmine\Player;
+use pocketmine\item\Item;
 use pocketmine\utils\{
     Config, TextFormat as C
 };
@@ -14,24 +15,24 @@ class UIManager{
 
     /** @var Main */
     private $plugin;
-    /** @var Config */
-    private $cfg;
 
     public function __construct(Main $plugin){
         $this->plugin = $plugin;
     }
 
     public function crateUI(Player $player) : void{
-        $this->cfg = $this->getCfg($player);
+        $this->cfg = $this->plugin->getPlayerCfg($player);
         $form = $this->plugin->FormAPI->createSimpleForm(function (Player $player, array $data){
-            switch($data[0]){
+            $result = $data[0];
+            if($result != null){
+            }
+            switch($result){
                 case 1:
-                    return;
+                return;
             }
         });
 
         $form->setTitle(C::BLUE . "Crates List");
-        $form->setContent("");
         $form->addButton(C::WHITE . "Exit");
         $form->addButton(C::GREEN . "Common " . C::GRAY . "- " . C::YELLOW . $this->cfg->get("Common"));
         $form->addButton(C::RED . "Vote " . C::GRAY . "- " . C::YELLOW . $this->cfg->get("Vote"));
@@ -40,11 +41,13 @@ class UIManager{
         $form->sendToPlayer($player);
     }
 
-    public function getPlayer(Player $player) : string{
-        return $this->plugin->getDataFolder() . "players" . DIRECTORY_SEPARATOR . strtolower($player->getName()) . ".yml";
-    }
-
-    public function getCfg(Player $player) : Config{
-        return new Config($this->getPlayer($player), Config::YAML);
+    public function Common(Player $player){
+        $this->cfg = $this->plugin->getPlayerCfg($player);
+        if($this->cfg->get("Common") >= 1){
+            $item = mt_rand($this->plugin->getItemCfg()->get("Common"));
+            $player->getInventory()->addItem(Item::get($item));
+        }else{
+            $player->sendMessage(C::RED . "You don't have any Common key.");
+        }
     }
 }

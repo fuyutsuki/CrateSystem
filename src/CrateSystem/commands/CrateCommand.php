@@ -5,8 +5,6 @@ namespace CrateSystem\commands;
 
 use pocketmine\Player;
 use pocketmine\command\CommandSender;
-use pocketmine\level\sound\EndermanTeleportSound;
-use pocketmine\math\Vector3;
 use pocketmine\utils\{
     Config, TextFormat as C
 };
@@ -18,8 +16,6 @@ class CrateCommand extends BaseCommand{
 
     /** @var Main */
     private $plugin;
-    /** @var Config */
-    private $cfg;
     /** @var UIManager */
     private $UIManager;
 
@@ -38,8 +34,8 @@ class CrateCommand extends BaseCommand{
             return false;
         }
 
-        if($this->cfg->get("type") == "ui"){
-            $this->UIManager->CrateUI($sender);
+        if($this->plugin->getCfg()->get("type") == "ui"){
+            $this->UIManager->crateUI($sender);
         }
         return true;
     }

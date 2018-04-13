@@ -7,9 +7,7 @@ use pocketmine\command\ConsoleCommandSender;
 use pocketmine\Player;
 use pocketmine\command\CommandSender;
 use pocketmine\lang\TranslationContainer;
-use pocketmine\utils\{
-    Config, TextFormat as C
-};
+use pocketmine\utils\TextFormat as C;
 
 use CrateSystem\Main;
 
@@ -17,10 +15,6 @@ class KeyCommand extends BaseCommand{
 
     /** @var Main */
     private $plugin;
-    /** @var array */
-    public $keys = ["Common"];
-    /** @var Config */
-    private $cfg;
 
     public function __construct(Main $plugin){
         parent::__construct("key", $plugin);
@@ -30,6 +24,7 @@ class KeyCommand extends BaseCommand{
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) : bool{
         $usage = "Usage: /key <player> <key> <amount>";
+
         if(!$sender->hasPermission("cratesystem.key")){
             $sender->sendMessage(new TranslationContainer(C::RED . "%commands.generic.permission"));
             return false;
@@ -56,7 +51,7 @@ class KeyCommand extends BaseCommand{
         }
 
         if($args[1] == in_array($args[1], ["Common", "Vote", "Rare", "Legendary"])){
-            $this->cfg = $this->getCfg($player);
+            $this->cfg = $this->plugin->getPlayerCfg($player);
             $this->cfg->set($args[1], $args[2]);
             $this->cfg->save();
             $sender->sendMessage(C::GREEN . "Successfully Gave {$player->getName()} $args[2] $args[1] Crate!");
@@ -67,13 +62,5 @@ class KeyCommand extends BaseCommand{
         }
 
         return true;
-    }
-
-    public function getPlayer(Player $player){
-        return $this->plugin->getDataFolder() . "players" . DIRECTORY_SEPARATOR . strtolower($player->getName()) . ".yml";
-    }
-
-    public function getCfg(Player $player){
-        return new Config($this->getPlayer($player), Config::YAML);
     }
 }
