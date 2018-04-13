@@ -15,28 +15,43 @@ use CrateSystem\Main;
 class CrateCommand extends BaseCommand{
 
     /** @var Main */
-    private $plugin;
+    private $main;
     /** @var UIManager */
     private $UIManager;
+    /** @var Config $cfg */
+    private $cfg;
 
-    public function __construct(Main $plugin){
-        parent::__construct("crate", $plugin);
-        $this->plugin = $plugin;
+    /**
+     * CrateCommand constructor.
+     * @param Main $main
+     */
+    public function __construct(Main $main){
+        parent::__construct("crate", $main);
+        $this->main = $main;
         $this->setDescription("Crate Command.");
     }
 
+    /**
+     * @param CommandSender $sender
+     * @param string $commandLabel
+     * @param array $args
+     * @return bool
+     */
     public function execute(CommandSender $sender, string $commandLabel, array $args) : bool{
-        $this->cfg = new Config($this->plugin->getDataFolder() . "config.yml", Config::YAML);
-        $this->UIManager = new UIManager($this->plugin);
+        $this->cfg = new Config($this->getMain()->getDataFolder() . "config.yml", Config::YAML);
+        $this->UIManager = new UIManager($this->getMain());
 
         if(!$sender instanceof Player){
             $sender->sendMessage(C::RED . "Please use this command ingame.");
             return false;
         }
 
-        if($this->plugin->getCfg()->get("type") == "ui"){
+        if($this->getMain()->getCfg()->get("type") == "ui"){
             $this->UIManager->crateUI($sender);
         }
         return true;
+    }
+    public function getMain(): Main{
+        return $this->main;
     }
 }

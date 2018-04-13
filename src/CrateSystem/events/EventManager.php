@@ -9,14 +9,14 @@ use CrateSystem\Main;
 class EventManager{
 
     /** @var Main */
-    private $plugin;
+    private $main;
 
-    public function __construct(Main $plugin){
-        $this->plugin = $plugin;
+    public function __construct(Main $main){
+        $this->main = $main;
         $this->registerEvents();
     }
 
     public function registerEvents() : void{
-        new JoinEventListener($this->plugin);
+        new JoinEventListener($this->main);
     }
 }

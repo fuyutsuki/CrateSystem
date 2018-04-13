@@ -7,16 +7,16 @@ namespace CrateSystem;
 class Configuration{
 
     /** @var Main */
-    private $plugin;
+    private $main;
 
-    public function __construct(Main $plugin){
-        $this->plugin = $plugin;
+    public function __construct(Main $main){
+        $this->main = $main;
         $this->registerConfig();
     }
 
     public function registerConfig() : void{
-        $this->plugin->saveResource("items.yml");
-        $this->plugin->saveResource("config.yml");
-        if(!is_dir($this->plugin->getDataFolder() . "players")) @mkdir($this->plugin->getDataFolder() . "players");
+        $this->main->saveResource("items.yml");
+        $this->main->saveResource("config.yml");
+        if(!is_dir($this->main->getDataFolder() . "players")) @mkdir($this->main->getDataFolder() . "players");
     }
 }

@@ -4,30 +4,48 @@ declare(strict_types=1);
 
 namespace CrateSystem\commands;
 
+use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 use pocketmine\command\{
     Command, PluginIdentifiableCommand
 };
-use pocketmine\plugin\Plugin;
 
 use CrateSystem\Main;
 
 abstract class BaseCommand extends Command implements PluginIdentifiableCommand{
 
     /** @var Main */
-    private $plugin;
+    private $main;
 
-    public function __construct(string $name, Main $plugin){
+    /**
+     * BaseCommand constructor.
+     * @param string $name
+     * @param Main $main
+     */
+    public function __construct(string $name, Main $main){
         parent::__construct($name);
-        $this->plugin = $plugin;
+        $this->main = $main;
         $this->usageMessage = "";
     }
 
+    /**
+     * @return Main
+     */
     public function getPlugin() : Plugin{
-        return $this->plugin;
+        return $this->getMain();
     }
 
+    /**
+     * @return Server
+     */
     public function getServer() : Server{
-        return $this->plugin->getServer();
+        return $this->getMain()->getServer();
+    }
+
+    /**
+     * @return Main
+     */
+    public function getMain(): Main{
+        return $this->main;
     }
 }

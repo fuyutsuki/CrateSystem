@@ -14,15 +14,24 @@ use CrateSystem\Main;
 class UIManager{
 
     /** @var Main */
-    private $plugin;
+    private $main;
+    /** @var Config $cfg */
+    private $cfg;
 
-    public function __construct(Main $plugin){
-        $this->plugin = $plugin;
+    /**
+     * UIManager constructor.
+     * @param Main $main
+     */
+    public function __construct(Main $main){
+        $this->main = $main;
     }
 
+    /**
+     * @param Player $player
+     */
     public function crateUI(Player $player) : void{
-        $this->cfg = $this->plugin->getPlayerCfg($player);
-        $form = $this->plugin->FormAPI->createSimpleForm(function (Player $player, array $data){
+        $this->cfg = $this->getMain()->getPlayerCfg($player);
+        $form = $this->getMain()->FormAPI->createSimpleForm(function (Player $player, array $data){
             $result = $data[0];
             if($result != null){
             }
@@ -41,13 +50,23 @@ class UIManager{
         $form->sendToPlayer($player);
     }
 
+    /**
+     * @param Player $player
+     */
     public function Common(Player $player){
-        $this->cfg = $this->plugin->getPlayerCfg($player);
+        $this->cfg = $this->getMain()->getPlayerCfg($player);
         if($this->cfg->get("Common") >= 1){
-            $item = mt_rand($this->plugin->getItemCfg()->get("Common"));
+            $item = mt_rand($this->getMain()->getItemCfg()->get("Common"));
             $player->getInventory()->addItem(Item::get($item));
         }else{
             $player->sendMessage(C::RED . "You don't have any Common key.");
         }
+    }
+
+    /**
+     * @return Main
+     */
+    public function getMain(): Main{
+        return $this->main;
     }
 }

@@ -9,18 +9,23 @@ use CrateSystem\Main;
 class CommandManager{
 
     /** @var Main */
-    private $plugin;
+    private $main;
 
-    public function __construct(Main $plugin){
-        $this->plugin = $plugin;
+    /**
+     * CommandManager constructor.
+     * @param Main $main
+     */
+    public function __construct(Main $main){
+        $this->main = $main;
         $this->registerCommands();
     }
 
+
     public function registerCommands() : void{
         $commands = [
-            new CrateCommand($this->plugin),
-            new KeyCommand($this->plugin)
+            new CrateCommand($this->main),
+            new KeyCommand($this->main)
         ];
-        $this->plugin->getServer()->getCommandMap()->registerAll("CrateSystem", $commands);
+        $this->main->getServer()->getCommandMap()->registerAll("CrateSystem", $commands);
     }
 }
