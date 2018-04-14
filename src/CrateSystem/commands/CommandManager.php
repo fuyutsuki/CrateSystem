@@ -20,8 +20,7 @@ class CommandManager{
         $this->registerCommands();
     }
 
-
-    public function registerCommands() : void{
+    private function registerCommands() : void{
         $commands = [
             new CrateCommand($this->main),
             new KeyCommand($this->main)

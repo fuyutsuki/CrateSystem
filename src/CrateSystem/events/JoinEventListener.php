@@ -17,7 +17,7 @@ class JoinEventListener implements Listener{
 
     public function __construct(Main $main){
         $this->main = $main;
-        $main->getServer()->getmainManager()->registerEvents($this, $main);
+        $main->getServer()->getPluginManager()->registerEvents($this, $main);
     }
 
     public function onJoin(PlayerJoinEvent $event) : void{

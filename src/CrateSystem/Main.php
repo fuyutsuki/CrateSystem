@@ -7,10 +7,8 @@ namespace CrateSystem;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
-
 use CrateSystem\commands\CommandManager;
 use CrateSystem\crates\CrateManager;
-use CrateSystem\key\KeyManager;
 use CrateSystem\UIAPI\FormAPI;
 use CrateSystem\events\EventManager;
 
@@ -35,7 +33,7 @@ class Main extends PluginBase{
         $this->FormAPI = new FormAPI();
     }
 
-    public function getCfg(){
+    public function getCfg() : Config{
         return new Config($this->getDataFolder() . "config.yml", Config::YAML);
     }
 
@@ -47,7 +45,7 @@ class Main extends PluginBase{
         return new Config($this->getDataFolder() . "items.yml", Config::YAML);
     }
 
-    public function getPlayer(Player $player){
+    public function getPlayer(Player $player) : string{
         return $this->getDataFolder() . "players" . DIRECTORY_SEPARATOR . strtolower($player->getName()) . ".yml";
     }
 }

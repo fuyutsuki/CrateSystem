@@ -16,7 +16,7 @@ class EventManager{
         $this->registerEvents();
     }
 
-    public function registerEvents() : void{
+    private function registerEvents() : void{
         new JoinEventListener($this->main);
     }
 }

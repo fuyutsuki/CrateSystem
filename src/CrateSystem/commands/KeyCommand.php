@@ -16,7 +16,7 @@ class KeyCommand extends BaseCommand{
 
     /** @var Main */
     private $main;
-    /** @var Config $cfg */
+    /** @var Config */
     private $cfg;
 
     public function __construct(Main $main){
@@ -27,8 +27,8 @@ class KeyCommand extends BaseCommand{
 
     /**
      * @param CommandSender $sender
-     * @param string $commandLabel
-     * @param array $args
+     * @param string        $commandLabel
+     * @param array         $args
      * @return bool
      */
     public function execute(CommandSender $sender, string $commandLabel, array $args) : bool{
@@ -69,10 +69,10 @@ class KeyCommand extends BaseCommand{
             $sender->sendMessage(C::RED . "Could'nt found Crate $args[1]");
             return false;
         }
-
         return true;
     }
-    public function getMain(): Main{
+
+    public function getMain() : Main{
         return $this->main;
     }
 }

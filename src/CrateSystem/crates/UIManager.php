@@ -28,6 +28,7 @@ class UIManager{
 
     /**
      * @param Player $player
+     * @return void
      */
     public function crateUI(Player $player) : void{
         $this->cfg = $this->getMain()->getPlayerCfg($player);
@@ -37,7 +38,7 @@ class UIManager{
             }
             switch($result){
                 case 1:
-                return;
+                    return;
             }
         });
 
@@ -52,8 +53,9 @@ class UIManager{
 
     /**
      * @param Player $player
+     * @return void
      */
-    public function Common(Player $player){
+    public function Common(Player $player) : void{
         $this->cfg = $this->getMain()->getPlayerCfg($player);
         if($this->cfg->get("Common") >= 1){
             $item = mt_rand($this->getMain()->getItemCfg()->get("Common"));
@@ -63,10 +65,7 @@ class UIManager{
         }
     }
 
-    /**
-     * @return Main
-     */
-    public function getMain(): Main{
+    public function getMain() : Main{
         return $this->main;
     }
 }

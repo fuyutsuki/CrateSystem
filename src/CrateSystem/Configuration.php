@@ -14,7 +14,7 @@ class Configuration{
         $this->registerConfig();
     }
 
-    public function registerConfig() : void{
+    private function registerConfig() : void{
         $this->main->saveResource("items.yml");
         $this->main->saveResource("config.yml");
         if(!is_dir($this->main->getDataFolder() . "players")) @mkdir($this->main->getDataFolder() . "players");

@@ -18,7 +18,7 @@ class CrateCommand extends BaseCommand{
     private $main;
     /** @var UIManager */
     private $UIManager;
-    /** @var Config $cfg */
+    /** @var Config */
     private $cfg;
 
     /**
@@ -33,8 +33,8 @@ class CrateCommand extends BaseCommand{
 
     /**
      * @param CommandSender $sender
-     * @param string $commandLabel
-     * @param array $args
+     * @param string        $commandLabel
+     * @param array         $args
      * @return bool
      */
     public function execute(CommandSender $sender, string $commandLabel, array $args) : bool{
@@ -51,7 +51,8 @@ class CrateCommand extends BaseCommand{
         }
         return true;
     }
-    public function getMain(): Main{
+
+    public function getMain() : Main{
         return $this->main;
     }
 }

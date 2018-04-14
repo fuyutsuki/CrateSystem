@@ -17,10 +17,7 @@ class CrateManager{
         $this->main = $main;
     }
 
-    /**
-     * @return Config
-     */
-    public function getCfg(){
+    public function getCfg() : Config{
     	return new Config($this->main->getDataFolder() . "config.yml", Config::YAML);
     }
 }
