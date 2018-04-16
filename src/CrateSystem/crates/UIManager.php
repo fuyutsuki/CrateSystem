@@ -34,17 +34,17 @@ class UIManager{
     public function crateUI(Player $player) : void{
         $this->cfg = $this->getMain()->getPlayerCfg($player);
         $form = Server::getInstance()->getPluginManager()->getPlugin("FormAPI")->createSimpleForm(function (Player $player, $data){
-        	// NOTE: $data returns int (SimpleForm key)
+            // NOTE: $data returns int (SimpleForm key)
             if($data !== null) {
-				switch ($data) {
-					case 1:
-						var_dump("Common");
-						return;
-					case 2:
-						var_dump("Vote");
-						return;
-				}
-			}
+                switch ($data) {
+                    case 1:
+                        var_dump("Common");
+                        return;
+                    case 2:
+                        var_dump("Vote");
+                        return;
+                }
+            }
         });
 
         $form->setTitle(C::BLUE . "Crates List");
