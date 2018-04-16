@@ -9,13 +9,10 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use CrateSystem\commands\CommandManager;
 use CrateSystem\crates\CrateManager;
-use CrateSystem\UIAPI\FormAPI;
 use CrateSystem\events\EventManager;
 
 class Main extends PluginBase{
 
-    /** @var FormAPI */
-    public $FormAPI;
     /** @var CrateManager */
     public $CrateManager;
 
@@ -30,7 +27,6 @@ class Main extends PluginBase{
         new EventManager($this);
         $this->CrateManager = new CrateManager($this);
         //$this->KeyManager = new KeyManager($this);
-        $this->FormAPI = new FormAPI();
     }
 
     public function getCfg() : Config{
